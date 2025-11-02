@@ -3,12 +3,15 @@ import Popularmovies from "./Popularmovies";
 import Trendingmovies from "./Trendingmovies";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Searchforamovie from "./Searchforamovie";
+import MultiSearch from "./Multisearch";
 
 function App() {
   return (
     <>
       <div className="logo">iMovies</div>
-      <Router>
+      <Router basename="/imovies">
+        {" "}
+        {/* ADD THIS BASENAME PROP */}
         <div>
           {/* Navigation */}
           <nav
@@ -22,10 +25,9 @@ function App() {
             }}
           >
             <Link
-              to="/"
+              to="/" // This will now resolve to /imovies/
               style={{
                 margin: "10px",
-
                 fontFamily: "Inter, sans-serif",
                 color: "#a8a821",
                 fontSize: "30px",
@@ -36,10 +38,9 @@ function App() {
               Popular Movies
             </Link>
             <Link
-              to="/search"
+              to="/search" // This will now resolve to /imovies/search
               style={{
                 margin: "10px",
-
                 fontFamily: "Inter, sans-serif",
                 color: "#a8a821",
                 fontSize: "30px",
@@ -47,13 +48,12 @@ function App() {
                 textDecoration: "none",
               }}
             >
-              Search a Movie
+              Search
             </Link>
             <Link
-              to="/trending"
+              to="/trending" // This will now resolve to /imovies/trending
               style={{
                 margin: "10px",
-
                 fontFamily: "Inter, sans-serif",
                 color: "#a8a821",
                 fontSize: "30px",
@@ -68,13 +68,11 @@ function App() {
           {/* Route Configuration */}
           <Routes>
             <Route path="/" element={<Popularmovies />} />
-            <Route path="/search" element={<Searchforamovie />} />
+            <Route path="/search" element={<MultiSearch />} />
             <Route path="/trending" element={<Trendingmovies />} />
           </Routes>
         </div>
       </Router>
-      {/* <Popularmovies /> */}
-      {/* <Trendingmovies /> */}
     </>
   );
 }
