@@ -1,24 +1,27 @@
 import { useState, useEffect } from "react";
 
-function Cast({ movieId }) {
+function Cast({ movieId, tvId, mediaType }) {
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Check if movieId is valid before making the API call
-    if (!movieId) {
+    // Determine which endpoint to use
+    let apiUrl = "";
+    if (mediaType === "tv" && tvId) {
+      apiUrl = `https://api.themoviedb.org/3/tv/${tvId}/credits?api_key=3e34829ad355424421b39a1a3162baa0`;
+    } else if (mediaType === "movie" && movieId) {
+      apiUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=3e34829ad355424421b39a1a3162baa0`;
+    } else {
       setLoading(false);
-      setError("No movie ID provided");
+      setError("No valid ID provided");
       return;
     }
 
     setLoading(true);
     setError(null);
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=3e34829ad355424421b39a1a3162baa0`
-    )
+    fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,14 +29,13 @@ function Cast({ movieId }) {
         return response.json();
       })
       .then((data) => {
-        // Check if data.cast exists before slicing
         if (data && data.cast) {
           const castWithImages = data.cast
-            .filter((person) => person.profile_path) // ← ADDED THIS FILTER
+            .filter((person) => person.profile_path)
             .slice(0, 6);
           setCast(castWithImages);
         } else {
-          setCast([]); // Set empty array if no cast data
+          setCast([]);
         }
         setLoading(false);
       })
@@ -42,7 +44,7 @@ function Cast({ movieId }) {
         setError("Failed to load cast");
         setLoading(false);
       });
-  }, [movieId]); // Re-run when movieId changes
+  }, [movieId, tvId, mediaType]); // tvId is now properly defined
 
   if (loading) return <div style={{ color: "white" }}>Loading cast...</div>;
   if (error) return <div style={{ color: "white" }}>{error}</div>;

@@ -31,7 +31,7 @@ function MultiSearch() {
         setLoading(false);
       });
   };
-
+  console.log("Multi:", data);
   // Filter results based on active tab
   const filteredResults = data?.results?.filter((item) => {
     if (activeTab === "all") return true;
@@ -105,6 +105,7 @@ function MultiSearch() {
               className="search-result-card" // CHANGED: Use different class name
             >
               {/* Movie Result */}
+              {/* Movie Result */}
               {item.media_type === "movie" && (
                 <div className="movie-result">
                   <img
@@ -114,21 +115,19 @@ function MultiSearch() {
                         : "https://via.placeholder.com/300x450/333/fff?text=No+Poster"
                     }
                     alt={item.title}
-                    className="search-result-image" // CHANGED: Use different class
+                    className="search-result-image"
                   />
                   <div className="search-result-info">
-                    {" "}
-                    {/* CHANGED: Use different class */}
                     <h3>{item.title}</h3>
                     <p className="media-type">Movie</p>
                     <p>Rating: {item.vote_average}</p>
                     <p>Release: {item.release_date}</p>
-                    <Cast movieId={item.id} />
+                    <Cast movieId={item.id} mediaType="movie" />{" "}
+                    {/* Fixed: added mediaType */}
                     <p className="overview">{item.overview}</p>
                   </div>
                 </div>
               )}
-
               {/* TV Show Result */}
               {item.media_type === "tv" && (
                 <div className="tv-result">
@@ -139,15 +138,15 @@ function MultiSearch() {
                         : "https://via.placeholder.com/300x450/333/fff?text=No+Poster"
                     }
                     alt={item.name}
-                    className="search-result-image" // CHANGED: Use different class
+                    className="search-result-image"
                   />
                   <div className="search-result-info">
-                    {" "}
-                    {/* CHANGED: Use different class */}
                     <h3>{item.name}</h3>
                     <p className="media-type">TV Show</p>
                     <p>Rating: {item.vote_average}</p>
                     <p>First Air: {item.first_air_date}</p>
+                    <Cast tvId={item.id} mediaType="tv" />{" "}
+                    {/* Fixed: use tvId instead of movieId */}
                     <p className="overview">{item.overview}</p>
                   </div>
                 </div>
