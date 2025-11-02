@@ -87,7 +87,7 @@ function Trendingmovies() {
                   Release Date: {movies.release_date}
                 </p>
               </div>
-              <Cast movieId={movies.id} />
+              <Cast movieId={movies.id} mediaType="movie" />
               <hr />
               <p
                 style={{
