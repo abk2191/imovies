@@ -41,9 +41,6 @@ nav {
   background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 
 nav a {
@@ -164,6 +161,10 @@ nav a:active {
 
 .movie-description:hover::before {
   opacity: 1;
+}
+
+.cast-info {
+  margin-bottom: 20px;
 }
 
 /* Movie Poster */

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Cast from "./Cast";
 
 function Searchforamovie() {
   const [data, setData] = useState(null);
@@ -120,6 +121,7 @@ function Searchforamovie() {
                     Release Date: {movie.release_date}
                   </p>
                 </div>
+                <Cast movieId={movie.id} />
                 <hr />
                 <p
                   style={{

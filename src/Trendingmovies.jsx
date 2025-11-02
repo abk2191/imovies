@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Cast from "./Cast";
 
 function Trendingmovies() {
   const [data, setData] = useState(null);
@@ -86,6 +87,7 @@ function Trendingmovies() {
                   Release Date: {movies.release_date}
                 </p>
               </div>
+              <Cast movieId={movies.id} />
               <hr />
               <p
                 style={{

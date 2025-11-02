@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Cast from "./Cast";
 
 function Popularmovies() {
   const [data, setData] = useState(null);
@@ -86,7 +87,9 @@ function Popularmovies() {
                   Release Date: {movies.release_date}
                 </p>
               </div>
+              <Cast movieId={movies.id} />
               <hr />
+
               <p
                 style={{
                   fontFamily: "Inter, sans-serif",
