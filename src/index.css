@@ -15,7 +15,7 @@ body {
 }
 
 /* Logo Styles */
-.logo {
+/* .logo {
   color: #ffd700;
   text-align: center;
   font-size: 3.5rem;
@@ -28,13 +28,14 @@ body {
   background-clip: text;
   text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
   letter-spacing: -0.02em;
-}
+} */
 
 /* Modern Navigation */
-nav {
+.nav {
   padding: 1.5rem 2rem;
   border-bottom: 1px solid rgba(255, 215, 0, 0.2);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4rem;
@@ -43,7 +44,45 @@ nav {
   -webkit-backdrop-filter: blur(20px);
 }
 
-nav a {
+.nav input {
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  width: 400px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  background: rgba(26, 26, 26, 0.8);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav h1 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #1a1a1a;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.searchdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* nav a {
   font-family: "Inter", sans-serif;
   color: #cccccc;
   font-size: 1.3rem;
@@ -85,7 +124,7 @@ nav a:hover {
 
 nav a:active {
   transform: translateY(0);
-}
+} */
 
 /* Main Container */
 .main-container {
@@ -270,11 +309,26 @@ nav a:active {
   background: rgba(255, 215, 0, 0.2);
 }
 
+.mobile-only {
+  height: 100vh;
+  width: 250px;
+  background-color: black;
+  z-index: 1000;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
 /* Responsive for search results */
 @media (max-width: 768px) {
   .search-result-card {
     flex-direction: column;
     text-align: center;
+  }
+
+  .mobile-only {
+    display: block;
   }
 
   .search-result-image {
@@ -430,7 +484,7 @@ nav a:active {
 /* Scrollbar Styling */
 .movie-description::-webkit-scrollbar {
   width: 6px;
-  display: block;
+  display: none;
 }
 
 .movie-description::-webkit-scrollbar-track {

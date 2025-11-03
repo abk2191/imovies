@@ -2,35 +2,12 @@
 import { useState, useEffect } from "react";
 import Cast from "./Cast";
 
-function MultiSearch() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+function MultiSearch({ data, handlesearchclose }) {
+  //const [data, setData] = useState(null);
+  //const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("all"); // "all", "movies", "tv", "people"
 
-  const handleSearch = () => {
-    if (!searchQuery.trim()) {
-      alert("Please enter a search term");
-      return;
-    }
-
-    setLoading(true);
-
-    fetch(
-      `https://api.themoviedb.org/3/search/multi?api_key=3e34829ad355424421b39a1a3162baa0&query=${encodeURIComponent(
-        searchQuery
-      )}`
-    )
-      .then((response) => response.json())
-      .then((jsondata) => {
-        setData(jsondata);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
-  };
   console.log("Multi:", data);
   // Filter results based on active tab
   const filteredResults = data?.results?.filter((item) => {
@@ -40,12 +17,13 @@ function MultiSearch() {
 
   return (
     <div className="main-container">
-      <h1 style={{ fontFamily: "Inter, sans-serif", color: "#a8a821" }}>
+      <button onClick={handlesearchclose}>close</button>
+      {/* <h1 style={{ fontFamily: "Inter, sans-serif", color: "#a8a821" }}>
         Search Movies & TV Shows
-      </h1>
+      </h1> */}
 
       {/* Search Input */}
-      <div className="search-div">
+      {/* <div className="search-div">
         <input
           type="text"
           value={searchQuery}
@@ -58,7 +36,7 @@ function MultiSearch() {
           }}
         />
         <button onClick={handleSearch}>Search</button>
-      </div>
+      </div> */}
 
       {/* Results Tabs */}
       {data && data.results && (
@@ -95,7 +73,6 @@ function MultiSearch() {
       )}
 
       {/* Results */}
-      {loading && <div className="loading">Searching...</div>}
 
       {data && filteredResults && filteredResults.length > 0 && (
         <div className="multi-results">

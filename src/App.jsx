@@ -4,75 +4,75 @@ import Trendingmovies from "./Trendingmovies";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Searchforamovie from "./Searchforamovie";
 import MultiSearch from "./Multisearch";
+import Sidebar from "./Sidebar";
 
 function App() {
+  const [showsidebar, setShowsidebar] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState(null);
+  const [isSearchOn, setIsSearchOn] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [multisearchvisibility, setMultisearchVisibility] = useState(false);
+
+  const handlesearchclose = () => {
+    setIsSearchOn(true);
+    setMultisearchVisibility(false);
+  };
+
+  const handleSearch = () => {
+    setIsSearchOn(false);
+    setMultisearchVisibility(true);
+    if (!searchQuery.trim()) {
+      alert("Please enter a search term");
+      return;
+    }
+
+    setLoading(true);
+
+    fetch(
+      `https://api.themoviedb.org/3/search/multi?api_key=3e34829ad355424421b39a1a3162baa0&query=${encodeURIComponent(
+        searchQuery
+      )}`
+    )
+      .then((response) => response.json())
+      .then((jsondata) => {
+        setData(jsondata);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  };
+
   return (
     <>
-      <div className="logo">iMovies</div>
-      <Router basename="/imovies">
-        {" "}
-        {/* ADD THIS BASENAME PROP */}
-        <div>
-          {/* Navigation */}
-          <nav
-            style={{
-              padding: "20px",
-              borderBottom: "1px solid #ccc",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "40px",
-            }}
-          >
-            <Link
-              to="/" // This will now resolve to /imovies/
-              style={{
-                margin: "10px",
-                fontFamily: "Inter, sans-serif",
-                color: "#a8a821",
-                fontSize: "30px",
-                fontWeight: "bold",
-                textDecoration: "none",
+      <div>
+        <div className="nav">
+          <h1>iMovies</h1>
+          <div className="searchdiv">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search movies, TV shows, and people..."
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
               }}
-            >
-              Popular Movies
-            </Link>
-            <Link
-              to="/search" // This will now resolve to /imovies/search
-              style={{
-                margin: "10px",
-                fontFamily: "Inter, sans-serif",
-                color: "#a8a821",
-                fontSize: "30px",
-                fontWeight: "bold",
-                textDecoration: "none",
-              }}
-            >
-              Search
-            </Link>
-            <Link
-              to="/trending" // This will now resolve to /imovies/trending
-              style={{
-                margin: "10px",
-                fontFamily: "Inter, sans-serif",
-                color: "#a8a821",
-                fontSize: "30px",
-                fontWeight: "bold",
-                textDecoration: "none",
-              }}
-            >
-              Trending Movies
-            </Link>
-          </nav>
-
-          {/* Route Configuration */}
-          <Routes>
-            <Route path="/" element={<Popularmovies />} />
-            <Route path="/search" element={<MultiSearch />} />
-            <Route path="/trending" element={<Trendingmovies />} />
-          </Routes>
+            />
+            <button onClick={handleSearch}>Search</button>
+          </div>
         </div>
-      </Router>
+
+        {multisearchvisibility && (
+          <MultiSearch data={data} handlesearchclose={handlesearchclose} />
+        )}
+
+        {isSearchOn && <Popularmovies />}
+        {isSearchOn && <Trendingmovies />}
+      </div>
     </>
   );
 }
