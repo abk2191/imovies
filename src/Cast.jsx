@@ -32,7 +32,7 @@ function Cast({ movieId, tvId, mediaType }) {
         if (data && data.cast) {
           const castWithImages = data.cast
             .filter((person) => person.profile_path)
-            .slice(0, 6);
+            .slice(0, 3);
           setCast(castWithImages);
         } else {
           setCast([]);
@@ -57,19 +57,21 @@ function Cast({ movieId, tvId, mediaType }) {
       <div className="cast-grid">
         {cast.map((person) => (
           <div key={person.id} className="cast-card">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
-              alt={person.name}
-              style={{
-                width: "80px",
-                height: "80px",
-                borderRadius: "50%",
-                objectFit: "cover",
-                margin: "0 auto 0.5rem",
-                border: "2px solid #ffd700",
-              }}
-            />
-            <div className="cast-info">
+            <div className="cast-images">
+              <img
+                src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
+                alt={person.name}
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  margin: "0 auto 0.5rem",
+                  border: "2px solid #ffd700",
+                }}
+              />
+            </div>
+            <div>
               <p className="cast-name">{person.name}</p>
               <p className="cast-character">as {person.character}</p>
             </div>

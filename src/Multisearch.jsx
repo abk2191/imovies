@@ -1,6 +1,8 @@
 // MultiSearch.jsx
 import { useState, useEffect } from "react";
 import Cast from "./Cast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function MultiSearch({ data, handlesearchclose }) {
   //const [data, setData] = useState(null);
@@ -17,7 +19,18 @@ function MultiSearch({ data, handlesearchclose }) {
 
   return (
     <div className="main-container">
-      <button onClick={handlesearchclose}>close</button>
+      <button
+        onClick={handlesearchclose}
+        style={{
+          color: "#a8a821",
+          fontSize: "50px",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
       {/* <h1 style={{ fontFamily: "Inter, sans-serif", color: "#a8a821" }}>
         Search Movies & TV Shows
       </h1> */}
