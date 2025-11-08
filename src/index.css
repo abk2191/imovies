@@ -139,17 +139,19 @@ body {
 
 .multi-results {
   display: flex;
-  flex-direction: column;
+  overflow: auto;
+  height: 450px;
   gap: 1.5rem;
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
+  /* border: 2px solid blue; */
 }
 
 .search-result-card {
-  border: 2px solid #a8a821;
+  /* border: 2px solid #a8a821; */
   display: flex;
-  flex-direction: column;
+  width: fit-content;
   align-items: center;
   justify-content: center;
 }

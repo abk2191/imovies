@@ -97,8 +97,20 @@ function MultiSearch({ data, handlesearchclose }) {
               {/* Movie Result */}
               {/* Movie Result */}
               {item.media_type === "movie" && (
-                <div className="movie-result">
-                  <img
+                <div
+                  className="movie-result"
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w300${item.poster_path})`,
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    height: "400px",
+                    width: "250px",
+                    borderRadius: "10px",
+                    position: "relative", // Added for content positioning
+                  }}
+                >
+                  {/* <img
                     src={
                       item.poster_path
                         ? `https://image.tmdb.org/t/p/w300${item.poster_path}`
@@ -106,22 +118,25 @@ function MultiSearch({ data, handlesearchclose }) {
                     }
                     alt={item.title}
                     className="search-result-image"
-                  />
-                  <div className="search-result-info">
-                    <h3>{item.title}</h3>
-                    <p className="media-type">Movie</p>
-                    <p>Rating: {item.vote_average}</p>
-                    <p>Release: {item.release_date}</p>
-                    <Cast movieId={item.id} mediaType="movie" />{" "}
-                    {/* Fixed: added mediaType */}
-                    <p className="overview">{item.overview}</p>
-                  </div>
+                  /> */}
                 </div>
               )}
               {/* TV Show Result */}
               {item.media_type === "tv" && (
-                <div className="tv-result">
-                  <img
+                <div
+                  className="tv-result"
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w300${item.poster_path})`,
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    height: "400px",
+                    width: "250px",
+                    borderRadius: "10px",
+                    position: "relative", // Added for content positioning
+                  }}
+                >
+                  {/* <img
                     src={
                       item.poster_path
                         ? `https://image.tmdb.org/t/p/w300${item.poster_path}`
@@ -129,16 +144,16 @@ function MultiSearch({ data, handlesearchclose }) {
                     }
                     alt={item.name}
                     className="search-result-image"
-                  />
-                  <div className="search-result-info">
+                  /> */}
+                  {/* <div className="search-result-info">
                     <h3>{item.name}</h3>
                     <p className="media-type">TV Show</p>
                     <p>Rating: {item.vote_average}</p>
                     <p>First Air: {item.first_air_date}</p>
                     <Cast tvId={item.id} mediaType="tv" />{" "}
-                    {/* Fixed: use tvId instead of movieId */}
+                    
                     <p className="overview">{item.overview}</p>
-                  </div>
+                  </div> */}
                 </div>
               )}
 
