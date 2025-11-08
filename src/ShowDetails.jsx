@@ -63,9 +63,11 @@ function ShowDetails() {
 
       {data && (
         <>
-          <h1 style={{ color: "#ffd700", marginBottom: "1rem" }}>
-            {data.title || data.name}
-          </h1>
+          <div className="content-name">
+            <h1 style={{ color: "#ffd700", marginBottom: "1rem" }}>
+              {data.title || data.name}
+            </h1>
+          </div>
           <p style={{ marginBottom: "2rem", lineHeight: "1.6" }}>
             {data.overview}
           </p>

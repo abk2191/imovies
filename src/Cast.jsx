@@ -56,23 +56,25 @@ function Cast({ movieId, tvId, mediaType }) {
       <h3 style={{ color: "#ffd700", marginBottom: "10px" }}>Top Cast</h3>
       <div className="cast-grid">
         {cast.map((person) => (
-          <div key={person.id} className="cast-card">
-            <div className="cast-images">
-              <img
-                src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
-                alt={person.name}
-                style={{
-                  width: "80px",
-                  height: "80px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  margin: "0 auto 0.5rem",
-                  border: "2px solid #ffd700",
-                }}
-              />
-            </div>
-            <div>
-              <p className="cast-name">{person.name}</p>
+          <div className="class-card-container">
+            <div key={person.id} className="cast-card">
+              <div className="cast-images">
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
+                  alt={person.name}
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    margin: "0 auto 0.5rem",
+                    border: "2px solid #ffd700",
+                  }}
+                />
+              </div>
+              <div>
+                <p className="cast-name">{person.name}</p>
+              </div>
             </div>
           </div>
         ))}
