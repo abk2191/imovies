@@ -38,67 +38,20 @@ function Trendingmovies() {
         </h1>
         <div className="movie-container">
           {data.results.map((movies) => (
-            <div key={movies.id} className="movie-description">
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
-                style={{
-                  height: "250px",
-                  width: "250px",
-                  borderRadius: "5px",
-                }}
-                alt=""
-              />
-              <h2
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  lineHeight: "1.6",
-                  color: "white",
-                }}
-              >
-                {movies.title}
-              </h2>
-              <hr />
-              <div className="language-and-release-div">
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    lineHeight: "1.6",
-                    color: "white",
-                  }}
-                >
-                  Rating: {movies.vote_average}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    lineHeight: "1.6",
-                    color: "white",
-                  }}
-                >
-                  Language: {movies.original_language}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    lineHeight: "1.6",
-                    color: "white",
-                  }}
-                >
-                  Release Date: {movies.release_date}
-                </p>
-              </div>
-              <Cast movieId={movies.id} mediaType="movie" />
-              <hr />
-              <p
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  lineHeight: "1.6",
-                  color: "white",
-                }}
-              >
-                {movies.overview}
-              </p>
-            </div>
+            <div
+              key={movies.id}
+              className="movie-description"
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/w500${movies.poster_path})`,
+                backgroundSize: "100% 100%",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                height: "400px",
+                width: "250px",
+                borderRadius: "10px",
+                position: "relative", // Added for content positioning
+              }}
+            ></div>
           ))}
         </div>
       </div>
