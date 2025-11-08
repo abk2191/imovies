@@ -254,23 +254,25 @@ body {
 }
 
 .trending-actors {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 200px;
   min-width: 200px;
   width: 200px;
+  height: 200px;
   border-radius: 50%;
+  border: 3px solid #ffd700;
+  flex-shrink: 0; /* This prevents shrinking */
 }
 
 .actors-div {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed from center */
   gap: 20px;
-  overflow: auto;
+  overflow-x: auto; /* Horizontal scroll */
+  overflow-y: hidden; /* Prevent vertical scroll */
   width: 900px;
   padding: 20px;
+  height: 250px; /* Fixed height */
 }
 
 .parent-actor-container {
@@ -279,7 +281,9 @@ body {
   align-items: center;
   justify-content: center;
   background-color: black;
-  gap: 50px;
+  gap: 30px; /* Reduced gap */
+  padding: 2rem 0; /* Added padding */
+  margin-bottom: 35px;
 }
 
 .parent-actor-container h1 {
@@ -287,7 +291,7 @@ body {
   color: #ffd700;
   font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0; /* Remove bottom margin */
   text-align: center;
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   -webkit-background-clip: text;

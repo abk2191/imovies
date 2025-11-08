@@ -20,6 +20,23 @@ function TrendingActors() {
   }, []);
   console.log("From Trending Actors:", data);
 
+  // ADD THESE LOADING AND ERROR CHECKS
+  if (loading) {
+    return (
+      <div style={{ color: "white", textAlign: "center" }}>
+        Loading actors...
+      </div>
+    );
+  }
+
+  if (!data || !data.results) {
+    return (
+      <div style={{ color: "white", textAlign: "center" }}>
+        No actors data available
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="parent-actor-container">
@@ -32,27 +49,22 @@ function TrendingActors() {
           Trending Actors
         </h1>
         <div className="actors-div">
-          {data &&
-            data.results &&
-            data.results.map((actor) => (
-              <div
-                key={actor.id}
-                className="trending-actors"
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/h632/${actor.profile_path})`,
-                  backgroundSize: "100% 100%",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  // height: "200px",
-                  // width: "200px",
-                  // borderRadius: "50%",
-                  border: "3px solid #ffd700",
-                  position: "relative", // Added for content positioning
-                }}
-              >
-                {/* <p style={{ color: "white" }}>{actor.name}</p> */}
-              </div>
-            ))}
+          {data.results.map((actor) => (
+            <div
+              key={actor.id}
+              className="trending-actors"
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/h632/${actor.profile_path})`,
+                backgroundSize: "100% 100%",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                border: "3px solid #ffd700",
+                position: "relative",
+              }}
+            >
+              {/* <p style={{ color: "white" }}>{actor.name}</p> */}
+            </div>
+          ))}
         </div>
       </div>
     </>
