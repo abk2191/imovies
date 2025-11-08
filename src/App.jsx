@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import ShowDetails from "./ShowDetails";
 import MultiSearch from "./Multisearch";
+import TrendingActors from "./TrendingActors";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -108,6 +109,7 @@ function App() {
               <Trendingmovies
                 sendDetailsToShowDetails={sendDetailsToShowDetails}
               />
+              <TrendingActors />
             </>
           )}
         </>
