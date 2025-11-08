@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import Popularmovies from "./Popularmovies";
 import Trendingmovies from "./Trendingmovies";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Searchforamovie from "./Searchforamovie";
+import ShowDetails from "./ShowDetails";
+
 import MultiSearch from "./Multisearch";
-import Sidebar from "./Sidebar";
 
 function App() {
   const [showsidebar, setShowsidebar] = useState(false);
@@ -13,6 +13,15 @@ function App() {
   const [isSearchOn, setIsSearchOn] = useState(true);
   const [loading, setLoading] = useState(true);
   const [multisearchvisibility, setMultisearchVisibility] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({
+    id: null,
+    mediaType: "movie",
+  });
+
+  const sendDetailsToShowDetails = (id, mediaType = "movie") => {
+    console.log("ID:", id, "Type:", mediaType);
+    setSelectedItem({ id, mediaType });
+  };
 
   const handlesearchclose = () => {
     setIsSearchOn(true);
@@ -67,11 +76,23 @@ function App() {
         </div>
 
         {multisearchvisibility && (
-          <MultiSearch data={data} handlesearchclose={handlesearchclose} />
+          <MultiSearch
+            data={data}
+            handlesearchclose={handlesearchclose}
+            sendDetailsToShowDetails={sendDetailsToShowDetails}
+          />
         )}
 
-        {isSearchOn && <Popularmovies />}
-        {isSearchOn && <Trendingmovies />}
+        {isSearchOn && (
+          <Popularmovies sendDetailsToShowDetails={sendDetailsToShowDetails} />
+        )}
+        {isSearchOn && (
+          <Trendingmovies sendDetailsToShowDetails={sendDetailsToShowDetails} />
+        )}
+        <ShowDetails
+          movieId={selectedItem.id}
+          mediaType={selectedItem.mediaType}
+        />
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import Cast from "./Cast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function MultiSearch({ data, handlesearchclose }) {
+function MultiSearch({ data, handlesearchclose, sendDetailsToShowDetails }) {
   //const [data, setData] = useState(null);
   //const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -109,6 +109,7 @@ function MultiSearch({ data, handlesearchclose }) {
                     borderRadius: "10px",
                     position: "relative", // Added for content positioning
                   }}
+                  onClick={() => sendDetailsToShowDetails(item.id, "movie")}
                 >
                   {/* <img
                     src={
@@ -135,55 +136,26 @@ function MultiSearch({ data, handlesearchclose }) {
                     borderRadius: "10px",
                     position: "relative", // Added for content positioning
                   }}
-                >
-                  {/* <img
-                    src={
-                      item.poster_path
-                        ? `https://image.tmdb.org/t/p/w300${item.poster_path}`
-                        : "https://via.placeholder.com/300x450/333/fff?text=No+Poster"
-                    }
-                    alt={item.name}
-                    className="search-result-image"
-                  /> */}
-                  {/* <div className="search-result-info">
-                    <h3>{item.name}</h3>
-                    <p className="media-type">TV Show</p>
-                    <p>Rating: {item.vote_average}</p>
-                    <p>First Air: {item.first_air_date}</p>
-                    <Cast tvId={item.id} mediaType="tv" />{" "}
-                    
-                    <p className="overview">{item.overview}</p>
-                  </div> */}
-                </div>
+                  onClick={() => sendDetailsToShowDetails(item.id, "tv")}
+                ></div>
               )}
 
               {/* Person Result */}
               {item.media_type === "person" && (
-                <div className="person-result">
-                  <img
-                    src={
-                      item.profile_path
-                        ? `https://image.tmdb.org/t/p/w300${item.profile_path}`
-                        : "https://via.placeholder.com/300x450/333/fff?text=No+Photo"
-                    }
-                    alt={item.name}
-                    className="search-result-image" // CHANGED: Use different class
-                  />
-                  <div className="search-result-info">
-                    {" "}
-                    {/* CHANGED: Use different class */}
-                    <h3>{item.name}</h3>
-                    <p className="media-type">Person</p>
-                    <p>Known for: {item.known_for_department}</p>
-                    <div className="known-for">
-                      {item.known_for?.map((work) => (
-                        <span key={work.id} className="known-work">
-                          {work.title || work.name}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                <div
+                  className="person-result"
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w300${item.profile_path})`,
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    height: "400px",
+                    width: "250px",
+                    borderRadius: "10px",
+                    position: "relative", // Added for content positioning
+                  }}
+                  onClick={() => sendDetailsToShowDetails(item.id, "movie")}
+                ></div>
               )}
             </div>
           ))}

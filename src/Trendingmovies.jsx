@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Cast from "./Cast";
 
-function Trendingmovies() {
+function Trendingmovies({ sendDetailsToShowDetails }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +51,7 @@ function Trendingmovies() {
                 borderRadius: "10px",
                 position: "relative", // Added for content positioning
               }}
+              onClick={() => sendDetailsToShowDetails(movies.id)}
             ></div>
           ))}
         </div>

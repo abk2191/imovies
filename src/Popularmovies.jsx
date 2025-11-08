@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import Cast from "./Cast";
 
-function Popularmovies() {
+function Popularmovies({ sendDetailsToShowDetails }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +50,7 @@ function Popularmovies() {
                 borderRadius: "10px",
                 position: "relative", // Added for content positioning
               }}
+              onClick={() => sendDetailsToShowDetails(movies.id)}
             ></div>
           ))}
         </div>
