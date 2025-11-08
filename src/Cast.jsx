@@ -73,7 +73,6 @@ function Cast({ movieId, tvId, mediaType }) {
             </div>
             <div>
               <p className="cast-name">{person.name}</p>
-              <p className="cast-character">as {person.character}</p>
             </div>
           </div>
         ))}

@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import Popularmovies from "./Popularmovies";
 import Trendingmovies from "./Trendingmovies";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import ShowDetails from "./ShowDetails";
-
 import MultiSearch from "./Multisearch";
 
 function App() {
@@ -13,14 +18,15 @@ function App() {
   const [isSearchOn, setIsSearchOn] = useState(true);
   const [loading, setLoading] = useState(true);
   const [multisearchvisibility, setMultisearchVisibility] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({
-    id: null,
-    mediaType: "movie",
-  });
+
+  // Remove selectedItem state since we'll use URL params
+
+  const navigate = useNavigate();
 
   const sendDetailsToShowDetails = (id, mediaType = "movie") => {
     console.log("ID:", id, "Type:", mediaType);
-    setSelectedItem({ id, mediaType });
+    // Navigate to details page instead of setting state
+    navigate(`/details/${mediaType}/${id}`);
   };
 
   const handlesearchclose = () => {
@@ -58,7 +64,9 @@ function App() {
     <>
       <div>
         <div className="nav">
-          <h1>iMovies</h1>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <h1>iMovies</h1>
+          </Link>
           <div className="searchdiv">
             <input
               type="text"
@@ -75,27 +83,47 @@ function App() {
           </div>
         </div>
 
-        {multisearchvisibility && (
-          <MultiSearch
-            data={data}
-            handlesearchclose={handlesearchclose}
-            sendDetailsToShowDetails={sendDetailsToShowDetails}
-          />
-        )}
+        <Routes>
+          {/* Home Route */}
+          <Route
+            path="/"
+            element={
+              <>
+                {multisearchvisibility && (
+                  <MultiSearch
+                    data={data}
+                    handlesearchclose={handlesearchclose}
+                    sendDetailsToShowDetails={sendDetailsToShowDetails}
+                  />
+                )}
 
-        {isSearchOn && (
-          <Popularmovies sendDetailsToShowDetails={sendDetailsToShowDetails} />
-        )}
-        {isSearchOn && (
-          <Trendingmovies sendDetailsToShowDetails={sendDetailsToShowDetails} />
-        )}
-        <ShowDetails
-          movieId={selectedItem.id}
-          mediaType={selectedItem.mediaType}
-        />
+                {isSearchOn && (
+                  <Popularmovies
+                    sendDetailsToShowDetails={sendDetailsToShowDetails}
+                  />
+                )}
+                {isSearchOn && (
+                  <Trendingmovies
+                    sendDetailsToShowDetails={sendDetailsToShowDetails}
+                  />
+                )}
+              </>
+            }
+          />
+
+          {/* Details Route */}
+          <Route path="/details/:mediaType/:id" element={<ShowDetails />} />
+        </Routes>
       </div>
     </>
   );
 }
 
-export default App;
+// Wrap App with Router
+export default function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
