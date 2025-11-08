@@ -1,7 +1,13 @@
 import { useState } from "react";
 import Popularmovies from "./Popularmovies";
 import Trendingmovies from "./Trendingmovies";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import ShowDetails from "./ShowDetails";
 import MultiSearch from "./Multisearch";
 
@@ -12,6 +18,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const sendDetailsToShowDetails = (id, mediaType = "movie") => {
     navigate(`/details/${mediaType}/${id}`);
@@ -54,6 +61,9 @@ function App() {
     navigate("/");
   };
 
+  // Check if we're on details page
+  const isDetailsPage = location.pathname.startsWith("/details");
+
   return (
     <div>
       {/* Navigation */}
@@ -81,32 +91,30 @@ function App() {
         </div>
       </div>
 
-      {/* ALL CONTENT GOES INSIDE ROUTES - Only one route shows at a time */}
-      <Routes>
-        {/* Home Route - Shows either search results OR popular/trending */}
-        <Route
-          path="/"
-          element={
-            multisearchvisibility ? (
-              <MultiSearch
-                data={data}
-                handlesearchclose={handlesearchclose}
+      {/* Show home content UNLESS we're on details page */}
+      {!isDetailsPage && (
+        <>
+          {multisearchvisibility ? (
+            <MultiSearch
+              data={data}
+              handlesearchclose={handlesearchclose}
+              sendDetailsToShowDetails={sendDetailsToShowDetails}
+            />
+          ) : (
+            <>
+              <Popularmovies
                 sendDetailsToShowDetails={sendDetailsToShowDetails}
               />
-            ) : (
-              <>
-                <Popularmovies
-                  sendDetailsToShowDetails={sendDetailsToShowDetails}
-                />
-                <Trendingmovies
-                  sendDetailsToShowDetails={sendDetailsToShowDetails}
-                />
-              </>
-            )
-          }
-        />
+              <Trendingmovies
+                sendDetailsToShowDetails={sendDetailsToShowDetails}
+              />
+            </>
+          )}
+        </>
+      )}
 
-        {/* Details Route - Shows ONLY ShowDetails when on this route */}
+      {/* Routes - Only for ShowDetails */}
+      <Routes>
         <Route path="/details/:mediaType/:id" element={<ShowDetails />} />
       </Routes>
     </div>
