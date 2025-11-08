@@ -14,22 +14,6 @@ body {
   line-height: 1.6;
 }
 
-/* Logo Styles */
-/* .logo {
-  color: #ffd700;
-  text-align: center;
-  font-size: 3.5rem;
-  font-weight: 800;
-  font-family: "Inter", sans-serif;
-  padding: 2rem 0;
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-  letter-spacing: -0.02em;
-} */
-
 /* Modern Navigation */
 .nav {
   padding: 1.5rem 2rem;
@@ -60,6 +44,8 @@ body {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.5rem;
 }
 
 .nav button {
@@ -88,7 +74,6 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-
   margin-bottom: 35px;
   background-color: black;
 }
@@ -109,14 +94,11 @@ body {
 
 /* Modern Movie Grid */
 .movie-container {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); */
   display: flex;
   gap: 2.5rem;
   padding: 2rem;
   width: 900px;
   margin: 0 auto;
-
   overflow-x: auto;
 }
 
@@ -124,7 +106,6 @@ body {
   position: relative;
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 20px;
-
   height: 400px;
   padding: 1.5rem;
   overflow: hidden;
@@ -145,11 +126,9 @@ body {
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
-  /* border: 2px solid blue; */
 }
 
 .search-result-card {
-  /* border: 2px solid #a8a821; */
   display: flex;
   width: fit-content;
   align-items: center;
@@ -172,7 +151,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: fit-content;
 }
 
@@ -199,6 +177,7 @@ body {
   gap: 40px;
   margin-bottom: 20px;
 }
+
 /* Results Tabs */
 .results-tabs {
   display: flex;
@@ -260,19 +239,19 @@ body {
   height: 200px;
   border-radius: 50%;
   border: 3px solid #ffd700;
-  flex-shrink: 0; /* This prevents shrinking */
+  flex-shrink: 0;
 }
 
 .actors-div {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Changed from center */
+  justify-content: flex-start;
   gap: 20px;
-  overflow-x: auto; /* Horizontal scroll */
-  overflow-y: hidden; /* Prevent vertical scroll */
+  overflow-x: auto;
+  overflow-y: hidden;
   width: 900px;
   padding: 20px;
-  height: 250px; /* Fixed height */
+  height: 250px;
 }
 
 .parent-actor-container {
@@ -281,8 +260,8 @@ body {
   align-items: center;
   justify-content: center;
   background-color: black;
-  gap: 30px; /* Reduced gap */
-  padding: 2rem 0; /* Added padding */
+  gap: 30px;
+  padding: 2rem 0;
   margin-bottom: 35px;
 }
 
@@ -291,7 +270,7 @@ body {
   color: #ffd700;
   font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 0; /* Remove bottom margin */
+  margin-bottom: 0;
   text-align: center;
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   -webkit-background-clip: text;
@@ -299,17 +278,251 @@ body {
   background-clip: text;
   text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
 }
-/* Responsive for search results */
+
+/* ===== MOBILE RESPONSIVE DESIGN ===== */
+
+/* Tablets and smaller desktops */
+@media (max-width: 1024px) {
+  .movie-container,
+  .actors-div {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .main-container h1,
+  .parent-actor-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Tablets and large phones */
 @media (max-width: 768px) {
-  .main-container {
-    width: 1000px;
-  }
-
   .nav {
-    width: 1000px;
+    padding: 1rem;
+    gap: 2rem;
   }
 
-  .parent-actor-container {
-    width: 1000px;
+  .nav input {
+    width: 300px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
+  .nav button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .nav h1 {
+    font-size: 2rem;
+  }
+
+  .main-container {
+    padding: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .main-container h1,
+  .parent-actor-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .movie-container,
+  .actors-div {
+    width: 100%;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .movie-description {
+    height: 350px;
+    width: 200px;
+  }
+
+  .trending-actors {
+    min-height: 150px;
+    min-width: 150px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .actors-div {
+    height: 200px;
+    padding: 15px;
+  }
+
+  .cast-grid {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .class-card-container {
+    gap: 40px;
+  }
+
+  .cast-images {
+    gap: 50px;
+  }
+
+  .results-tabs {
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .results-tabs button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .nav {
+    padding: 0.8rem;
+    gap: 1.5rem;
+  }
+
+  .nav input {
+    width: 250px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .nav button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .nav h1 {
+    font-size: 1.8rem;
+  }
+
+  .searchdiv {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .nav input {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .main-container {
+    padding: 0.8rem;
+    margin-bottom: 20px;
+  }
+
+  .main-container h1,
+  .parent-actor-container h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .movie-container,
+  .actors-div {
+    padding: 0.8rem;
+    gap: 1rem;
+  }
+
+  .movie-description {
+    height: 300px;
+    width: 180px;
+    border-radius: 15px;
+  }
+
+  .trending-actors {
+    min-height: 120px;
+    min-width: 120px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .actors-div {
+    height: 180px;
+    padding: 10px;
+  }
+
+  .cast-grid {
+    gap: 15px;
+  }
+
+  .class-card-container {
+    gap: 25px;
+  }
+
+  .cast-images {
+    gap: 30px;
+  }
+
+  .results-tabs {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .results-tabs button {
+    width: 200px;
+    text-align: center;
+  }
+
+  /* Show Details page mobile optimization */
+  .content-name h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .cast-container h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .nav h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-container h1,
+  .parent-actor-container h1 {
+    font-size: 1.4rem;
+  }
+
+  .movie-description {
+    height: 250px;
+    width: 150px;
+  }
+
+  .trending-actors {
+    min-height: 100px;
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Landscape mode for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .nav {
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .movie-description {
+    height: 250px;
+    width: 160px;
+  }
+
+  .actors-div {
+    height: 150px;
+  }
+
+  .trending-actors {
+    min-height: 100px;
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
   }
 }

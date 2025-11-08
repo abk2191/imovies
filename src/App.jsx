@@ -11,6 +11,7 @@ import {
 import ShowDetails from "./ShowDetails";
 import MultiSearch from "./Multisearch";
 import TrendingActors from "./TrendingActors";
+import TrendingBollywoodActors from "./TrendingBollywoodActors";
 import TrendingHindiMovies from "./TrendingHindiMovies";
 import TrendingBengaliMovies from "./TrendingBengaliMovies";
 
@@ -112,6 +113,7 @@ function App() {
                 sendDetailsToShowDetails={sendDetailsToShowDetails}
               />
               <TrendingActors />
+
               <TrendingHindiMovies
                 sendDetailsToShowDetails={sendDetailsToShowDetails}
               />
