@@ -11,6 +11,8 @@ import {
 import ShowDetails from "./ShowDetails";
 import MultiSearch from "./Multisearch";
 import TrendingActors from "./TrendingActors";
+import TrendingHindiMovies from "./TrendingHindiMovies";
+import TrendingBengaliMovies from "./TrendingBengaliMovies";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -110,6 +112,12 @@ function App() {
                 sendDetailsToShowDetails={sendDetailsToShowDetails}
               />
               <TrendingActors />
+              <TrendingHindiMovies
+                sendDetailsToShowDetails={sendDetailsToShowDetails}
+              />
+              <TrendingBengaliMovies
+                sendDetailsToShowDetails={sendDetailsToShowDetails}
+              />
             </>
           )}
         </>

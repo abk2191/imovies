@@ -1,0 +1,62 @@
+import { useState, useEffect } from "react";
+
+function TrendingBengaliMovies({ sendDetailsToShowDetails }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(
+      "https://api.themoviedb.org/3/discover/movie?api_key=3e34829ad355424421b39a1a3162baa0&with_original_language=bn&sort_by=popularity.desc"
+    )
+      .then((response) => response.json())
+      .then((jsondata) => {
+        setData(jsondata);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  }, []);
+  console.log(data);
+
+  if (loading) {
+    return <div>Loading Bengali movies...</div>;
+  }
+
+  return (
+    <>
+      <div className="main-container">
+        <h1
+          style={{
+            fontFamily: "Inter, sans-serif",
+            color: "#a8a821",
+          }}
+        >
+          Trending Bengali Movies
+        </h1>
+        <div className="movie-container">
+          {data.results.map((movies) => (
+            <div
+              key={movies.id}
+              className="movie-description"
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/w500${movies.poster_path})`,
+                backgroundSize: "100% 100%",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                height: "400px",
+                width: "250px",
+                borderRadius: "10px",
+                position: "relative",
+              }}
+              onClick={() => sendDetailsToShowDetails(movies.id)}
+            ></div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default TrendingBengaliMovies;
